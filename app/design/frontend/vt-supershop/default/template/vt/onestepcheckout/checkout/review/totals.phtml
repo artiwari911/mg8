@@ -1,0 +1,39 @@
+<?php
+ /**
+ * Onestepcheckout Extension
+ *
+ *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.store.vt.com/license.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to admin@vt.com so we can mail you a copy immediately.
+ *
+ * @category   Magento Extensions
+ * @package    Vt_Onestepcheckout
+ * @author     Vt <sales@vt.com>
+ * @copyright  2007-2011 Vt
+ * @license    http://www.store.vt.com/license.txt
+ * @version    1.0.1
+ * @link       http://www.store.vt.com
+ */
+ ?>
+<?php if ($this->getTotals()): ?>
+<tfoot class="onestepcheckout-order-totals">
+    <?php $_colspan = $this->helper('tax')->displayCartBothPrices() ? 5 : 3; ?>
+    <?php echo $this->renderTotals(null, $_colspan); ?>
+    <?php echo $this->renderTotals('footer', $_colspan); ?>
+    <?php if ($this->needDisplayBaseGrandtotal()):?>
+    <tr>
+        <td class="a-right" colspan="<?php echo $_colspan; ?>">
+            <small><?php echo $this->helper('sales')->__('Your credit card will be charged for') ?></small>
+        </td>
+        <td class="a-right">
+            <small><?php echo $this->displayBaseGrandtotal() ?></small>
+        </td>
+    </tr>
+    <?php endif?>
+</tfoot>
+<?php endif; ?>

@@ -1,0 +1,41 @@
+<?php if(Mage::helper('fconnector')->isActivated()):?>
+<div id="fb-root"></div>
+<script type="text/javascript">
+//<![CDATA[
+window.fbAsyncInit = function() {
+	FB.init({
+		appId  : <?php echo json_encode($this->getApiKey()) ?>,
+		status : true, // check login status
+		oauth  : true,
+		cookie : true, // enable cookies to allow the server to access the session
+		xfbml  : true,  // parse XFBML
+		channelUrl : '<?php echo $this->getChannelUrl() ?>'  // custom channel
+	});
+	document.fire(window, "facebook:fbAsyncInit");
+};
+
+(function(d){
+	var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+	js = d.createElement('script'); js.id = id; js.async = true;
+	js.src = "//connect.facebook.net/<?php echo $this->getLocale() ?>/all.js";
+	d.getElementsByTagName('head')[0].appendChild(js);
+}(document));
+
+document.observe('click', function(e){
+	var target = e.findElement('a[rel^=facebook-connect]') || e.findElement('button[rel^=facebook-connect]') || e.findElement('a[rel^=fb_share]');
+	if (target && target.readAttribute('rel')=='facebook-connect') {
+		e.stop();
+		try{
+			FB.login(function(response){
+				if(response.status=='connected'){
+					Mage.Cookies.set('fb-referer', '<?php echo $this->getUrlBase64('*/*/*', array('_current' => true)); ?>');
+					setLocation('<?php echo $this->getConnectUrl() ?>');
+				}
+			}, {scope:<?php echo $this->getRequiredPermissions() ?>});
+		}catch(error){alert(error);}
+	}
+	
+});
+//]]>
+</script>
+<?php endif;?>

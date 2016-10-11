@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">	
+	<default>
+		<reference name="after_body_start">
+            <block type="fconnector/template" template="vt/fconnector/init.phtml" name="facebook_init" />
+        </reference>
+	</default>
+	<customer_logged_out>
+      <!--  <reference name="top.links">
+			<action method="addLink" translate="label title" module="fconnector" ifconfig="fconnector/connect/enabled"><label>Login with Facebook</label><url helper="fconnector/getConnectUrl"/><title>Facebook Connect</title><prepare/><urlParams/><position>110</position><liParams/><aParams><rel>facebook-connect</rel><class>loginfb</class></aParams></action>
+        </reference> -->
+    </customer_logged_out>
+	<customer_account_login>
+		<reference name="content">
+    		<block type="fconnector/template" template="vt/fconnector/login.phtml" name="facebook_login" />
+    	</reference>
+	</customer_account_login>
+	<catalog_product_view>
+		<reference name="head">
+            <block type="core/template" name="facebook_product_page_meta">
+                <action method="setTemplate" ifconfig="fconnector/connect/enabled">
+                    <template>vt/fconnector/head.phtml</template>
+                </action>
+            </block>
+        </reference>
+        <reference name="alert.urls">
+            <block type="fconnector/fconnector" name="fconnector_like_share"/>
+        </reference>
+    </catalog_product_view>
+</layout> 

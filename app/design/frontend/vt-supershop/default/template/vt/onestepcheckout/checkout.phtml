@@ -1,0 +1,315 @@
+<?php
+ /**
+ * Onestepcheckout Extension
+ *
+ *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.store.vt.com/license.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to admin@vt.com so we can mail you a copy immediately.
+ *
+ * @category   Magento Extensions
+ * @package    Vt_Onestepcheckout
+ * @author     Vt <sales@vt.com>
+ * @copyright  2007-2011 Vt
+ * @license    http://www.store.vt.com/license.txt
+ * @version    1.0.1
+ * @link       http://www.store.vt.com
+ */
+ ?>
+<?php
+$cart = Mage::getSingleton('checkout/cart')->getItemsCount();
+$title = Mage::getStoreConfig('onestepcheckout/general/title');
+$description = Mage::getStoreConfig('onestepcheckout/general/description');
+$incartCheckout = Mage::getStoreConfig('onestepcheckout/general/on_cart_process');
+?>
+<?php if (Mage::getStoreConfig("carriers/localpickup/active", Mage::app()->getStore()->getId())):?>
+	<script type="text/javascript" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS)?>vt/localpickup/localpickup.js"></script>
+	<?php if(Mage::getStoreConfig("carriers/localpickup/store_map", Mage::app()->getStore()->getId()) == 1):?>
+	<script src="http://maps.google.com/maps?file=api&v=2&key=<?php echo Mage::getModel('localpickup/gmap')->getGmapKey() ?>" type="text/javascript"></script>
+	<?php endif;?>
+<?php endif;?>
+<?php if($cart != ""):?>
+<div id="onestepcheckout-content">
+	<div class="onestepcheckout-page-title">
+		<h1><?php echo $title ? $title : $this->__('Checkout Process')?></h1>
+	<div class="clear"></div>
+	<?php if ($description):?>
+		<h3><?php echo $description?></h3>
+	<?php endif;?>
+	</div>
+
+<div class="login-registration clearfix"><?php if (!$this->isCustomerLoggedIn()): ?><a  class="login-normal" href="javascript:osLightboxPopup('onlinebiz-os-login-form')" id="lightboxLink" title=""><?php echo $this->__('Sig in normal');?></a> <?php endif ?> 
+<?php if($incartCheckout != 1): ?><a class="forgot-edit-cart" href="<?php echo $this->getUrl('checkout/cart') ?>" title="Edit tor cart"><?php echo $this->__('Forgot an Item? Edit Your Cart') ?></a><?php endif; ?>
+</div>
+
+<?php if (!$this->isCustomerLoggedIn()): ?>
+<script type="text/javascript">
+
+Event.observe(window, 'load', function() {
+
+	var button = $('checkout-login-form-button');
+	var oscheckoutLogin = function(e) {
+		var logintable = $('checkout-login-form-table');
+		var loading = $('checkout-login-form-loading');
+		var error = $('checkout-login-form-error');
+		logintable.hide();
+		error.hide();
+		loading.show();
+		var form = $('checkout-login-form-detail');
+		var url = '<?php echo $this->getUrl('onestepcheckout/index/login', array('_secure' => true)); ?>';
+		new Ajax.Request(url, {
+			parameters: form.serialize(true),
+			method: 'POST',
+			onComplete: function(transport) {
+				if(transport.status == 200) {
+					var result = transport.responseText.evalJSON();
+					if(!result.success) {
+						loading.hide();
+						error.update(result.error);
+						error.show();
+						logintable.show();
+					} else {
+						window.location=window.location;
+					}
+				}
+			}
+		})
+	};
+
+	var onkeypressHandler = function(event) {
+		if(event.keyCode == Event.KEY_RETURN)  {
+			event.preventDefault();
+			oscheckoutLogin();
+		}
+	};
+
+	button.observe('click', oscheckoutLogin);
+
+})
+
+function returnLogin()
+{
+	$('forgot-password-form').hide();
+	$('checkout-login-form').show();
+}
+function sendPassword()
+{
+
+	var table = $('forgot-password-table');
+	var loading = $('forgot-password-loading');
+	var error = $('forgot-password-error');
+	var success = $('forgot-password-success');
+	var email = $('onestepcheckout_email').getValue();
+	if(email != '') {
+		table.hide();
+		error.hide();
+		loading.show();
+		var url = '<?php echo $this->getUrl('onestepcheckout/index/forgotPassword',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)); ?>';
+		var parameters = { email: email };
+
+		new Ajax.Request(url, {
+			method: 'post',
+			parameters: parameters,
+			onSuccess: function(transport)  {
+				var result = transport.responseText.evalJSON();
+
+				if(result.success)  {
+					 loading.hide();
+					 success.show();
+				}
+				else    {
+					error.update('<?php echo $this->__('Please enter a registered email address.'); ?>');
+					error.show();
+					table.show();
+					loading.hide();
+				}
+			}
+		});
+
+	} else  {
+		alert('<?php echo $this->__('Please enter a valid email address'); ?>');
+	}
+}
+function forgotPassword()
+{
+	$('checkout-login-form').hide();
+	$('forgot-password-form').show();
+}
+</script>
+<script type="text/javascript">
+
+</script>
+
+<div  id="onlinebiz-os-login-form"  style="display:none;position: fixed;z-index: 99999;">
+	<div class="onestepcheckout-popup-wrapper">
+		<div id="checkout-login-form-popup-contents-login" style="">
+			<a  class="close" href="javascript:osClose()"> <img src="<?php echo $this->getSkinUrl('images/btn_window_close.gif') ?>" alt="<?php echo $this->__('Close') ?>" width="16" height="16" title="<?php echo $this->__('close') ?>"  /></a>
+			<div id="checkout-login-form">
+				<h3 style="float: left; text-align: center; margin-left: 140px;"><?php echo $this->__('Login'); ?></h3>
+				<div class="clear"></div>
+				<p style="margin-bottom:20px;padding-left:14px;font-size:11px;text-align:center;"><?php echo $this->__('Please login with your email address and password.'); ?></p>
+
+				<form id="checkout-login-form-detail">
+					<div id="checkout-login-form-loading" style="display: none; " class="loading-ajax">&nbsp;</div>
+					<table id="checkout-login-form-table" style="margin-left:15px;">
+						<tbody><tr>
+						<td style="width: 30%; font-weight: bold;"><label for="id_onestepcheckout_username"><?php echo $this->__('Email address'); ?></label></td><td style="width:7%"></td>
+						<td style="width: 51%;"><input tabindex="100" type="text" class="input-text" name="onestepcheckout_username" id="id_onestepcheckout_username"></td><td></td>
+						</tr>
+						<tr style="height:10px;"></tr>
+						<tr>
+						<td style="font-weight: bold;"><label for="id_onestepcheckout_password"><?php echo $this->__('Password'); ?></label></td><td style="width:7%"></td>
+						<td width="80%;"><input type="password" tabindex="101" name="onestepcheckout_password" class="input-text" id="id_onestepcheckout_password"></td><td></td>
+						</tr><tr style="height:10px;"><td colspan="2"></td>
+						<td>
+						 <a style="padding-left:3px;cursor:pointer;" onclick="forgotPassword();"><?php echo $this->__('Forgot password?'); ?></a>
+						</td></tr>
+						<tr><td colspan="3"><div id="checkout-login-form-error" class="onestepcheckout-error" style="display: none; "><?php echo $this->__('Invalid login or password.'); ?></div></td><td style="width: 19%;"><button tabindex="102" id="checkout-login-form-button" class="button" type="button"><span><span><?php echo $this->__('Login'); ?></span></span></button></td></tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+			<div id="forgot-password-form" style="display:none;">
+				<h3 style="float: left; text-align: center; margin-left: 114px; "><?php echo $this->__('Forgot Password'); ?></h3>
+				<div class="clear"></div>
+				<p style="margin-bottom:20px;padding-left:14px;font-size:11px;text-align:center;"><?php echo $this->__('Please enter the email address to send a new password to your mail'); ?></p>
+
+				<form >
+					<div id="forgot-password-loading" style="display: none;" class="loading-ajax">&nbsp;</div>
+					<div id="forgot-password-error" class="onestepcheckout-error" style="display: none;">&nbsp;</div>
+					<div id="forgot-password-success" style="display: none;">
+					<?php echo $this->__('We have now sent you a new password to your email address. Click the link below to return to login.'); ?>
+					</div>
+					<table id="forgot-password-table">
+						<tr>
+						<td style="width: 25%;"><label for="onestepcheckout_email"><?php echo $this->__('Email address'); ?></label></td>
+						<td style="width: 40%;"><input type="text" class="input-text" name="onestepcheckout_email" id="onestepcheckout_email" /></td>
+						<td style="width: 45%; text-align: center;"><button id="onestepcheckout-forgot-button" class="button" onclick="sendPassword()" type="button"><span><span><?php echo $this->__('Send password'); ?></span></span></button></td>
+						</tr>
+					</table>
+				</form>
+
+				<a class="return-login" onclick="returnLogin()"><?php echo $this->__('Return to login'); ?></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<?php endif; ?>
+
+<form id="co-form" action="" method="post">
+	<ol id="checkoutsteps">
+		<li id="column-1" class="onestepcheckout-section">
+			 <ul>
+				 <li id="onepage-billing">
+					<?php echo $this->getChildHtml('billing'); ?>
+				 </li>
+				<?php if(!$this->getVirtual()): ?>
+				<li id="onepage-shipping">
+				<?php echo $this->getChildHtml('shipping');  ?>
+				</li>
+			<?php endif;?>
+			 </ul>
+		</li>
+		<?php if(Mage::getStoreConfig('onestepcheckout/general/column_no') == 2):?>
+		<li id="column-2-wide" class="onestepcheckout-section">
+		 
+		<?php if(!$this->getVirtual()): ?>
+			<div id="onepage-shipping-method-left">
+			<?php echo $this->getChildHtml('shipping_method');  ?>
+			</div>
+		<?php endif;?>
+			<div id="onepage-payment-right">
+			<?php echo $this->getChildHtml('payment'); ?>
+			</div>
+			<div class="clear"></div>
+			<div id="order-review" class="order-review-wide"><?php echo $this->getChildHtml('review'); ?></div>
+		</li>
+		<?php else:?>
+		<li id="column-2" class="onestepcheckout-section">
+		 <ul>
+		<?php if(!$this->getVirtual()): ?>
+			<li id="onepage-shipping-method">
+			<?php echo $this->getChildHtml('shipping_method');  ?>
+			</li>
+		<?php endif;?>
+			<li id="onepage-payment">
+			<?php echo $this->getChildHtml('payment'); ?>
+			</li>
+		 </ul>
+		</li>
+		<li id="column-3" class="onestepcheckout-section">
+		 <ul>
+		 <li id="onepage-review">
+		 <?php echo $this->getChildHtml('review'); ?>
+		 </li>
+		 </ul>
+		</li>
+		<?php endif;?>
+	</ol>
+</form>
+<div id="oscheckout-tranparent-bg" style="visibility: hidden;"></div>
+<script type="text/javascript">
+//<![CDATA[
+var checkout = new Checkout({
+review: '<?php echo $this->getUrl('onestepcheckout/index/loadData',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)) ?>',
+saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveBilling',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)) ?>',
+failure: '<?php echo $this->getUrl('onestepcheckout',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)) ?>'}
+);
+checkout.loadReview();
+//]]>
+</script>
+
+<script type="text/javascript">
+var osLightbox;
+function isRegistration()
+{ 
+	var  selectregisterElement= $('register_customer');
+
+	if ($('login:guest').checked)
+	{
+		Element.hide('register-customer-password');
+		Element.hide('register-customer-confirmpassword');
+		Element.hide('register-customer-newsletter');
+		selectregisterElement.value='';
+	}
+	else
+	{
+		Element.show('register-customer-password');
+		Element.show('register-customer-confirmpassword');
+		Element.show('register-customer-newsletter'); 
+		selectregisterElement.value='register';
+	}
+}
+function osLightboxPopup(Id)
+{
+    osLightbox = new Lightbox(Id);
+    osLightbox.open();
+}
+function osClose()
+{   var error = $('checkout-login-form-error');
+    var forgot_box = $('forgot-password-form');
+    var login_box = $('checkout-login-form');
+    var forgot_errbox = $('forgot-password-error');
+    error.hide();
+    forgot_errbox.hide();
+    forgot_box.hide();
+    login_box.show();
+    osLightbox.close();
+}
+window.onload = function() {
+	for(var i = 0, l = document.getElementsByTagName('input').length; i < l; i++) {
+		if(document.getElementsByTagName('input').item(i).type == 'text') {
+			document.getElementsByTagName('input').item(i).setAttribute('autocomplete', 'off');
+		};
+	};
+};
+</script>
+
+</div>
+<?php endif;?>

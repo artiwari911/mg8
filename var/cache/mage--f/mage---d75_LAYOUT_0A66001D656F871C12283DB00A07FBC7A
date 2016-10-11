@@ -1,0 +1,13 @@
+<block type="core/text_list" name="root" output="toHtml">
+   <block type="xmlconnect/adminhtml_mobile_preview_content" name="preview_home_content">
+      <action method="setTemplate">
+         <templateType>home</templateType>
+      </action>
+      <block type="xmlconnect/adminhtml_mobile_preview_tabitems" name="preview_tab_items" as="tab_items">
+         <action method="setActiveTab">
+            <tab>home</tab>
+         </action>
+      </block>
+   </block>
+   <block type="core/template" template="xmlconnect/edit/tab/design/preview/banner_rotator.phtml"/>
+</block>

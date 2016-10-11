@@ -1,0 +1,1 @@
+http://stackoverflow.com/questions/24556849/magento-add-pagination-toolbar-using-array-of-product-ids

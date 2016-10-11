@@ -1,0 +1,37 @@
+<?php
+ /**
+ * Onestepcheckout Extension
+ *
+ *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.store.vt.com/license.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to admin@vt.com so we can mail you a copy immediately.
+ *
+ * @category   Magento Extensions
+ * @package    Vt_Onestepcheckout
+ * @author     Vt <sales@vt.com>
+ * @copyright  2007-2011 Vt
+ * @license    http://www.store.vt.com/license.txt
+ * @version    1.0.1
+ * @link       http://www.store.vt.com
+ */
+
+?>
+<script type="text/javascript">
+//<![CDATA[
+
+    var payment = new Payment('<?php echo $this->getUrl('onestepcheckout/index/savePayment/',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)) ?>','<?php echo $this->getUrl('onestepcheckout/index/loadPayment/',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)) ?>','<?php echo $this->getUrl('onestepcheckout/index/index',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)) ?>');
+    
+//]]>
+ </script>
+<div class="page-title">
+  <?php  if ($this->getVirtual()) {?> <span class="shipping-method-bg"></span><?php }else {?><span class="payment-bg"></span> <?php }?> <h1><?php echo $this->__('Payment Methods') ?></h1>
+</div>
+
+<div id="ajax-payment-methods">
+<?php echo $this->getChildHtml('methods'); ?>
+</div>

@@ -1,0 +1,27 @@
+<?php if(Mage::helper('fconnector')->isActivated()):?>
+<script src='//static.ak.fbcdn.net/connect.php/js/FB.Share' type='text/javascript'></script>
+<script src='//platform.twitter.com/widgets.js' type='text/javascript'></script>
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+<style>
+.twitter-share-button {width:90px !important; overflow:hidden}
+</style>
+
+<table style="margin-top:15px">
+<tr>
+	<td style="padding-top:3px;">		
+		<a name="fb_share" type="button_count" share_url="<?php echo Mage::helper('catalog/product')->getProductUrl($this->getProduct())?>" href="http://www.facebook.com/sharer.php"></a>
+	</td>
+	<td style="padding:3px 8px;">		
+		<a class='twitter-share-button' data-count='horizontal' expr:data-text='<?php echo Mage::helper('catalog/product')->getProductUrl($this->getProduct())?>' data-size="medium" data-via='' data-related='' href='http://twitter.com/share'><?php echo $this->__('Tweet')?></a>
+	</td>
+	<td style="padding:3px 8px;">		
+		<a href="http://pinterest.com/pin/create/button/?url=<?php echo urlencode(Mage::helper('catalog/product')->getProductUrl($this->getProduct()))?>&media=<?php echo Mage::helper('catalog/image')->init(Mage::registry('current_product'), 'small_image')->resize(200,200);?>" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
+	</td>
+	<td style="padding:3px 8px;">		
+		<iframe src="//www.facebook.com/plugins/like.php?href=<?php echo Mage::helper('catalog/product')->getProductUrl($this->getProduct())?>&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+	</td>
+
+</tr>
+</table>
+
+<?php endif;?>

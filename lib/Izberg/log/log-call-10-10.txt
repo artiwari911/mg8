@@ -1,0 +1,5 @@
+10:53:09 | GET | https://api.iceberg.technology/v1/webhook/
+10:53:09 | DATE | {"meta": {"limit": 20, "next": null, "offset": 0, "previous": null, "total_count": 0}, "objects": []}
+10:53:11 | POST | https://api.iceberg.technology/v1/webhook/
+10:53:11 | PARAMS | {"url":"http:\/\/127.0.0.1\/mg8\/index.php\/izberg\/api\/product_offer_updated\/","event":"product_offer_updated","status":"active","comment":"Webhook created automatically from magento","label":"product_offer_updated from magento http:\/\/127.0.0.1\/mg8\/index.php\/","aggregation_delay":300,"max_trigger_aggregation":10}
+10:53:11 | DATE | 

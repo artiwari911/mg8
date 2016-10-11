@@ -1,0 +1,64 @@
+<?php
+ /**
+ * Onestepcheckout Extension
+ *
+ *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.store.vt.com/license.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to admin@vt.com so we can mail you a copy immediately.
+ *
+ * @category   Magento Extensions
+ * @package    Vt_Onestepcheckout
+ * @author     Vt <sales@vt.com>
+ * @copyright  2007-2011 Vt
+ * @license    http://www.store.vt.com/license.txt
+ * @version    1.0.1
+ * @link       http://www.store.vt.com
+ */
+?>
+<?php 
+$paymentmethods = Mage::getStoreConfig('onestepcheckout/general/default_payment_method');
+?>
+<dl class="sp-methods" id="checkout-payment-method-load">
+<?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+    <dt>
+    <?php if( sizeof($this->getMethods()) > 1 ): ?>
+        <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code || $_code==$paymentmethods): ?> checked="checked"<?php endif; ?>  class="radio validate-one-required-by-name" />
+    <?php else: ?>
+        <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if($_code): ?> checked="checked"<?php endif; ?>  class="radio" /></span>
+    <?php endif; ?>
+      <label for="p_method_<?php echo $_code ?>"><?php echo $this->getMethodTitle($_method) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+    </dt>
+    <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+    <dd>
+        <?php echo $html; ?>
+    </dd>
+    <?php endif; ?>
+<?php endforeach; ?>
+</dl>
+<?php echo $this->getChildChildHtml('additional'); ?>
+
+
+<script type="text/javascript">
+var paymentMethod;
+//<![CDATA[
+<?php  if(sizeof($this->getMethods()) ==1 || isset($paymentmethods)) { ?>
+paymentMethod = "<?php echo $paymentmethods ?>"; 
+
+<?php }?>    
+//]]> 
+ 
+document.observe('dom:loaded', function() {
+//<![CDATA[
+<?php  if(sizeof($this->getMethods()) ==1 || isset($paymentmethods)) { ?>
+payment.currentMethod = "<?php echo $paymentmethods ?>"; 
+payment.switchMethod('<?php echo $paymentmethods ?>') <?php }?>    
+<?php echo $this->getChildChildHtml('scripts'); ?>
+//]]> 
+ 
+});
+</script>

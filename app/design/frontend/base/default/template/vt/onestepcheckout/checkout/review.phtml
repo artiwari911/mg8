@@ -1,0 +1,201 @@
+<?php
+ /**
+ * Onestepcheckout Extension
+ *
+ *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.store.vt.com/license.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to admin@vt.com so we can mail you a copy immediately.
+ *
+ * @category   Magento Extensions
+ * @package    Vt_Onestepcheckout
+ * @author     Vt <sales@vt.com>
+ * @copyright  2007-2011 Vt
+ * @license    http://www.store.vt.com/license.txt
+ * @version    1.0.1
+ * @link       http://www.store.vt.com
+ */
+
+?>
+
+<div class="page-title">
+  <span class="review-bg"></span>  <h1><?php echo $this->__('Order Review') ?></h1>
+</div>
+<div class="order-review-content">
+	<div class="order-review" id="checkout-review-load"></div>
+	<?php $coupon_enabled=Mage::getStoreConfig('onestepcheckout/general/activate_discount');
+	 if($coupon_enabled):
+	?>
+	<div class="onestepcheckout-coupons">
+	<div class="ciseaux-coupon"></div>
+				<div id="coupon-notice" style="display: none;"></div>
+				<?php $couponcode = $this->getQuote()->getCouponCode(); ?>
+				<label style="font-weight:bold;"><?php echo $this->__('Coupon code:'); ?></label><br/>
+				<input class="input-text" type="text" name="couponcode" id="couponcode" value="<?php echo $couponcode; ?>" />            
+				<button  type="button" class="button" onclick="coupon_code()"><span><span><?php echo $this->__('Apply Coupon');
+	?></span></span></button>
+				<button type="button" class="button" id="coupon_remove" onclick="couponremove();" style="<?php if($couponcode ==
+	'') { echo 'display: none;'; } ?>"><span><span><?php echo $this->__('Cancel Coupon'); ?></span></span></button>
+				<script type="text/javascript">
+					function coupon_code()
+					{
+						var coupon = $('couponcode').getValue();
+						var couponMessage = $('coupon-notice');
+						couponMessage.hide();
+						if(coupon == '')
+						{
+							alert('<?php echo $this->__('Please enter a valid discount code.'); ?>');
+							return;
+						}
+
+						var url = '<?php echo $this->getUrl('onestepcheckout/index/couponcode',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)); ?>';
+						var parameters = {code: coupon};
+						var summary = $('checkout-review-load');
+
+						summary.update('<div class="loading-ajax">&nbsp;</div>');
+
+						new Ajax.Request(url, {
+							method: 'post',
+							parameters: parameters,
+							onSuccess: function(transport) {
+								if(transport.status == 200) {
+
+									var response = transport.responseText.evalJSON();
+
+									if(response.success) {
+										checkout.loadReview();
+										couponMessage.update(response.message);
+										couponMessage.removeClassName('error-msg');
+										couponMessage.addClassName('success-msg');
+										couponMessage.show();
+										$('coupon_remove').show();
+									}
+									else    {
+										checkout.loadReview();
+										couponMessage.update(response.message);
+										couponMessage.removeClassName('success-msg');
+										couponMessage.addClassName('error-msg');
+										couponMessage.show();
+										/* Hide remove button */
+										$('coupon_remove').hide();
+									}
+								}
+							}
+
+					});}
+
+				 function couponremove()
+				 {
+
+						var coupon = $('couponcode').getValue();
+						var couponNotice = $('coupon-notice');
+						couponNotice.hide();
+						var url = '<?php echo $this->getUrl('onestepcheckout/index/couponcode',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)); ?>';
+						var parameters = {code: coupon, remove: '1'};
+					   var summary = $('checkout-review-load');
+
+						summary.update('<div class="loading-ajax">&nbsp;</div>');
+
+						new Ajax.Request(url, {
+							method: 'post',
+							parameters: parameters,
+							onSuccess: function(transport)  {
+								if(transport.status == 200) {
+									var response = transport.responseText.evalJSON();
+
+									if(response.success){
+										$('couponcode').setValue('')
+										$('coupon_remove').hide();
+
+									}
+									var summary = $('checkout-review-load');
+
+								 checkout.loadReview();
+
+									couponNotice.hide();
+									couponNotice.update(response.message);
+									couponNotice.removeClassName('error-msg');
+									couponNotice.addClassName('success-msg');
+									couponNotice.show();
+								}
+							}
+					   });
+
+				 }
+				</script>
+			</div>
+	<?php endif; ?>
+	<?php $comments_enable = Mage::getStoreConfig('onestepcheckout/display_option/display_comments');
+	if($comments_enable == 1):
+	?>
+	<div class="onestepcheckout-comments">
+					<label for="id_comments"><?php echo $this->__('Comments:'); ?></label><br/>
+					<textarea id="id_comments" name="onestepcheckout_comments"><?php if(isset($_POST['onestepcheckout_comments'])) { echo $_POST['onestepcheckout_comments']; } ?></textarea>
+	</div>
+	<?php endif; ?>
+
+	 <?php 
+	 $terms_enable = Mage::getStoreConfig('onestepcheckout/terms/enable_terms');
+	 $terms_title = Mage::getStoreConfig('onestepcheckout/terms/terms_title');
+	 $terms_contents = Mage::getStoreConfig('onestepcheckout/terms/terms_contents');
+	 if($terms_enable == 1): ?>
+				<div class="onestepcheckout-enable-terms">
+				   <input class="required-entry" type="checkbox" id="id_accept_terms" name="accept_terms" value="1" />
+					<label for="id_accept_terms"><?php echo $this->__("I accept the ") ?><a href="javascript:osLightboxPopup('terms-condition')" id="lightboxLink" title="<?php echo $terms_title?>"><?php echo strtolower($terms_title);?></a></label> <em>*</em>
+				</div>
+			<?php endif; ?>
+			
+	<div id="checkout-review-submit">
+		<?php if($terms_enable != 1){ echo $this->getChildHtml('agreements'); } ?>
+		<div class="button-set" id="review-buttons-container">
+			<div id="place-order">
+				<button type="button" id="review-btn" title="<?php echo $this->__('Place Order') ?>" class="button btn-checkout" onclick="review.save();"><span><span><?php echo $this->__('Place Order') ?></span></span></button>
+			</div>
+			<div class="wait" id="processing-msg" style="display:none">
+				<div class="please-wait-loading">&nbsp;</div><span class="load-wait"><?php echo $this->__('Processing your order, please wait.')?></span>
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+		//<![CDATA[
+		  var review;
+		   
+		   var review = new Review('co-form','<?php echo $this->getUrl('onestepcheckout/index/saveOrder',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)) ?>','<?php echo $this->getUrl('checkout/onepage/success',  array('_secure'=>Mage::app()->getStore()->isCurrentlySecure() ? true : false)) ?>', $('checkout-agreements'));
+		//]]>
+		</script>
+	<div id="product-details"></div>
+
+	<?php if($terms_enable == 1): ?>
+	<div id="terms-condition" style="display:none;position: fixed;z-index: 99999;">
+
+		<div class="onestepcheckout-terms-popup">
+			<div class="onestepcheckout-popup-wrapper-inner">
+			<p class="close"><a href="javascript:closeLink()"><img src="<?php echo $this->getSkinUrl('images/btn_window_close.gif') ?>" alt="<?php echo $this->__('Close') ?>" width="16" height="16" title="<?php echo $this->__('close') ?>" /></a></p>
+				<h1><?php echo $terms_title; ?></h1>
+				<div class="onestepcheckout-toc-terms">
+					<?php echo $terms_contents; ?>
+				</div>
+			</div>
+		</div>
+		<div class="onestepcheckout-popup-footer">&nbsp;</div>
+	</div>
+<?php endif; ?>
+</div>
+<script type="text/javascript">
+var osLightbox;
+function osLightboxPopup(Id)
+{    
+	osLightbox = new Lightbox(Id);
+	osLightbox.open();
+}
+
+function closeLink()
+{  
+	osLightbox.close();
+}
+</script>

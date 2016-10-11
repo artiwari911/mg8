@@ -1,0 +1,173 @@
+.fa-search img{
+	background-repeat: no-repeat;
+}
+.devn-portfolio-filters{
+	float: right;
+	margin-bottom: 59px;
+}
+.devn-portfolio-filters .devn-portfolio-filter-item {
+	background-color: #FFF;
+	border: 2px solid #ECECEC;
+	color: #888;
+	cursor: pointer;
+	display: inline-block;
+	font: 400 13px/29px 'Raleway', sans-serif;
+	margin: 10px 5px 0 0;
+	overflow: visible;
+	padding: 4px 18px;
+	position: relative;
+	transition: all .3s ease-in-out;
+}
+.devn-portfolio-filters .devn-portfolio-filter-item-active {
+	background-color: #4D4C4D;
+	border-color: #4D4C4D;
+	color: #fff !important;
+	cursor: default;
+}
+.devn-portfolio-main {
+	position: relative;
+	margin: 0 auto;
+	min-height: 150px;
+	width: 100%;
+	visibility: visible!important;
+	clear: both;
+	overflow: hidden;
+}
+.devn-portfolio-main ul{
+	padding: 0px;
+	margin: 0px;
+}
+.devn-portfolio-main ul li{
+	list-style: none;
+}
+.devn-portfolio-main .item{
+	float: left;
+	position: relative;
+	overflow: hidden;
+	margin: 0;
+}
+.devn-portfolio-main .item.last{
+	margin-right: 0px !important;
+}
+.devn-portfolio-main.two .item{
+	width: 50%;
+}
+.devn-portfolio-main.four .item{
+	width: 25%;
+	margin: 0px;
+}
+.devn-portfolio-main .item .link-item{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	overflow: hidden;
+	height: 100%;
+	background: rgba(0,0,0,0.8);
+	color: #fff;
+	opacity: 0;
+	text-align: center;
+	transition: all 500ms ease-out 200ms;
+	-webkit-transition: all 500ms ease-out 200ms;
+}
+.devn-portfolio-main .item .link-item:hover{
+	opacity: 1;
+}
+.item .devn-portfolio-image{
+	width: 100%;
+}
+.item .devn-portfolio-image img{
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	width: 100%;
+	transition: all 1000ms ease-in-out 0ms;
+	-webkit-transition: all 1000ms ease-in-out 0ms;
+}
+.view-first:hover .devn-portfolio-image img{
+	transform: scale(1.8) rotate(10deg);
+	-webkit-transform: scale(1.8) rotate(10deg);
+}
+.item .devn-portfolio-caption{
+	margin: 30px;
+	display: inline-block;
+	opacity: 0;
+	transform:  scale(0.01) rotate(0deg);
+	-webkit-transform:  scale(0.01) rotate(0deg);
+	transition: all 300ms ease-out 500ms;
+	-webkit-transition: all 300ms ease-out 500ms;
+}
+.view-first:hover .devn-portfolio-caption{
+	opacity: 1;
+	transform:  scale(1) rotate(0deg);
+	-webkit-transform:  scale(1) rotate(0deg);
+}
+.view{
+	float: left;
+}
+.devn-portfolio-caption-title{
+	font-weight: bold;
+	font-size: 15px;
+}
+.devn-portfolio-caption-desc p{
+	font-style: italic;
+	color: #aaa;
+}
+.item .linkfr{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	padding: 0;
+	border-radius: 25px;
+	color: #eee;
+	opacity: 0.3;
+	transition: all 300ms ease-out 300ms;
+	-webkit-transition: all 300ms ease-out 300ms;
+	margin-top: -200px;
+}	
+.linkfr.view-large{
+	
+}
+.linkfr.more-detail{
+	margin-left: 5px;
+}
+.view-first:hover .linkfr{
+	color: #fff;
+	opacity: 1;
+	-webkit-animation: re3move 0.7s ease-out 0.4s alternate;
+	animation: re3move 0.7s ease-out 0.4s alternate;
+	margin-top: -35px;
+	min-width: 11px;
+}
+
+.item .linkfr:before{
+content: "\F0C1";
+font-family: "FontAwesome";
+padding: 19px 23px;
+position: absolute;
+top: 6px;
+right: -25px;
+border-radius: 30px;
+color: white;
+background: rgba(0, 0, 0, 1);
+}
+
+@keyframes re3move
+{
+	0% {transform: perspective( 200px ) rotateY( 0deg );margin-top: -200px;}
+	25% {transform: perspective( 200px ) rotateY( 50deg );margin-top: 30px;}
+	50% {transform: perspective( 200px ) rotateY( -90deg );margin-top:-30px}
+	75% {transform: perspective( 200px ) rotateY( 30deg );margin-top: -10px;}
+	100% {transform: perspective( 200px ) rotateY( 0deg );margin-top: -35px;}
+}
+
+@-webkit-keyframes re3move
+{
+	0% {-webkit-transform: perspective( 200px ) rotateY( 0deg );margin-top: -200px;}
+	25% {-webkit-transform: perspective( 200px ) rotateY( 50deg );margin-top: 30px;}
+	50% {-webkit-transform: perspective( 200px ) rotateY( -90deg );margin-top:-30px}
+	75% {-webkit-transform: perspective( 200px ) rotateY( 30deg );margin-top: -10px;}
+	100% {-webkit-transform: perspective( 200px ) rotateY( 0deg );margin-top: -35px;}
+}	
+	

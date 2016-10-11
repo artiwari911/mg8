@@ -1,0 +1,279 @@
+
+ <div class="container">
+    <div class="row">
+        <div class="row">
+	        <div class="inner-top">	 
+	        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	        		<div class="container">
+						<div class="row">
+					        <div class="row">    
+								<div class="box-link-01 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	        					<div class="inner"><a class="logo" href="#"><img src="http://127.0.0.1/mg8/media/wysiwyg/images/logo-footer.png" alt="" /></a>
+<ul>
+<li><a href="#">Online Shopping</a></li>
+<li><a href="#">Buy</a></li>
+<li><a href="#">Sell</a></li>
+<li><a href="#">All Promotions</a></li>
+<li><a href="#">My Orders</a></li>
+<li><a href="#">Help</a></li>
+<li><a href="#">Site Map</a></li>
+<li><a href="#">Customer Service </a></li>
+<li><a href="http://127.0.0.1/mg8/index.php/about-us.html/">About</a></li>
+<li><a href="http://127.0.0.1/mg8/index.php/contact.html/">Contact</a></li>
+</ul>
+</div>					        	</div>	
+							</div>
+						</div>
+					</div>
+	        	</div>
+						        <div class="block block-ma col-lg-3 col-md-3 col-sm-3 col-xs-12">       	
+		        	<div class="block-title"><span>My account</span></div>
+<div class="block-content">
+<ul>
+<li><a href="#">My Orders</a></li>
+<li><a href="#">My Wishlist</a></li>
+<li><a href="#">My Credit Slips</a></li>
+<li><a href="#">My Addresses</a></li>
+<li><a href="#">My Personal Info</a></li>
+</ul>
+</div>		        </div>
+		        <div class="block block-od col-lg-3 col-md-3 col-sm-3 col-xs-12">
+	        	<div class="block-title"><span>Help</span></div>
+<div class="block-content">
+<ul>
+<li><a href="#">Where's my order?</a></li>
+<li><a href="#">Contact us</a></li>
+<li><a href="#">Payments</a></li>
+<li><a href="#">Redeem a gift voucher</a></li>
+<li><a href="#">Delivery &amp; returns</a></li>
+</ul>
+</div>	        	</div>
+	        	<div class="block block-in col-lg-3 col-md-3 col-sm-3 col-xs-12">
+	        	<div class="block-title"><span>Further information</span></div>
+<div class="block-content">
+<ul>
+<li><a href="#">Drop Everything</a></li>
+<li><a href="http://127.0.0.1/mg8/index.php/about-us.html/">About Us</a></li>
+<li><a href="#">Affiliate programme</a></li>
+<li><a href="#">Privacy</a></li>
+<li><a href="#">Terms & conditions</a></li>
+</ul>
+</div>	        	</div>
+	        	<div class="block block-cu col-lg-3 col-md-3 col-sm-3 col-xs-12">
+	        	<div class="block-title"><span>Contact us</span></div>
+<div class="block-content">
+<ul>
+<li class="item1"><span>Our business address is 1063 <br />Freelon Street San Francisco</span></li>
+<li class="item2"><span>+ 020.566.6666</span></li>
+<li class="item3"><a href="mailto:support@7-Up.com">support@7-Up.com</a></li>
+</ul>
+</div>	        	</div>
+				
+	        	<div class="box-newletter col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="box-left">
+<h2>Newsletter</h2>
+
+<div class="block block-subscribe">    
+    <form action="http://127.0.0.1/mg8/index.php/newsletter/subscriber/new/" method="post" id="newsletter-validate-detail33831476192892">
+        <input name="form_key" type="hidden" value="JK2OxIOcXpcB7mfi" />
+        <div class="block-content">
+            <div class="input-box">
+               <input type="text" name="email" id="newsletter" title="Sign up for our newsletter" placeholder="enter your e-mail address" class="input-text required-entry validate-email" />
+            </div>
+            <div class="actions">
+                <button type="submit" title="Subscribe" class="button"><span><span>Subscribe</span></span></button>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+     var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail33831476192892');
+    /*onfocus="this.value=''" onblur="if(this.value==''){ this.value='Your email address'}"*/
+    //<![CDATA[
+       /*  var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+  
+        jQuery('#newsletter').focus(function(){
+            if(this.value == 'enter your e-mail address'){
+                this.value = '';
+            }
+        }).blur(function(){
+            if(jQuery.trim(this.value) == ''){
+                this.value = 'enter your e-mail address'
+            }
+        }); */
+    //]]>
+</script>
+</div>
+</div>
+<div class="box-right">
+<h2>Follow us</h2>
+<ul>
+<li><a href="#"><img src="http://127.0.0.1/mg8/media/wysiwyg/images/s1.png" alt="social" /></a></li>
+<li><a href="#"><img src="http://127.0.0.1/mg8/media/wysiwyg/images/s2.png" alt="social" /></a></li>
+<li><a href="#"><img src="http://127.0.0.1/mg8/media/wysiwyg/images/s3.png" alt="social" /></a></li>
+<li><a href="#"><img src="http://127.0.0.1/mg8/media/wysiwyg/images/s4.png" alt="social" /></a></li>
+<li><a href="#"><img src="http://127.0.0.1/mg8/media/wysiwyg/images/s5.png" alt="social" /></a></li>
+<li class="last"><a href="#"><img src="http://127.0.0.1/mg8/media/wysiwyg/images/s6.png" alt="social" /></a></li>
+</ul>
+</div>
+</div>	        </div>	
+					</div>
+	</div>
+</div>	
+<div class="inner-bottom">		
+	<div class="container">
+		<div class="row">
+	        <div class="row">    
+				<div class="block col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="box-link-item">
+<div class="item">
+<h2 class="title01"><span>Fashion</span></h2>
+<ul>
+<li><a href="#">Shirts</a></li>
+<li><a href="#">Jeans</a></li>
+<li><a href="#">T shirts</a></li>
+<li><a href="#">Kurtis</a></li>
+<li><a href="#">Sarees</a></li>
+<li><a href="#">Levis Jeans</a></li>
+<li><a href="#">Killer Jeans</a></li>
+<li><a href="#">Pepe Jeans</a></li>
+<li><a href="#">Arrow Shirts</a></li>
+<li><a href="#">Ethnic Wear</a></li>
+<li><a href="#">Formal Shirts</a></li>
+<li><a href="#">Peter England Shirts</a></li>
+<li><a class="last" href="#">View all</a></li>
+</ul>
+</div>
+<div class="item">
+<h2 class="title02"><span>electronics</span></h2>
+<ul>
+<li><a class="actived02" href="#">Mobile</a></li>
+<li><a href="#">Iphone</a></li>
+<li><a href="#">Glassxy</a></li>
+<li><a href="#">Lumia</a></li>
+<li><a class="actived02" href="#">Laptop</a></li>
+<li><a href="#">XPS Dell</a></li>
+<li><a href="#">Maxbook</a></li>
+<li><a href="#">Samsung</a></li>
+<li><a href="#">Sony</a></li>
+<li><a href="#">Acer</a></li>
+<li><a class="actived02" href="#">Tablets</a></li>
+<li><a href="#">Apple</a></li>
+<li><a href="#">Samsung</a></li>
+<li><a href="#">Sony</a></li>
+<li><a class="last" href="#">View all</a></li>
+</ul>
+</div>
+<div class="item">
+<h2 class="title03"><span>furniture</span></h2>
+<ul>
+<li><a href="#">Living rooms</a></li>
+<li><a href="#">Sofa &amp; Couches</a></li>
+<li><a href="#">Beds</a></li>
+<li><a href="#">Chair</a></li>
+<li><a href="#">Coffee Tables</a></li>
+<li><a href="#">Kitchen &amp; Dining Room</a></li>
+<li><a href="#">Small Bench</a></li>
+<li><a href="#">library</a></li>
+<li><a href="#">Wayfarer</a></li>
+<li><a href="#">Shield-Oval</a></li>
+<li><a href="#">Round</a></li>
+<li><a class="last" href="#">View all</a></li>
+</ul>
+</div>
+<div class="item">
+<h2 class="title04"><span>Food</span></h2>
+<ul>
+<li><a href="#">Food Blogs</a></li>
+<li><a href="#">Foodies</a></li>
+<li><a href="#">Food Culture</a></li>
+<li><a href="#">Hashtags</a></li>
+<li><a href="#">Food Porn</a></li>
+<li><a href="#">Piza</a></li>
+<li><a href="#">BBQ</a></li>
+<li><a href="#">Salat</a></li>
+<li><a href="#">Socola</a></li>
+<li><a href="#">Pate</a></li>
+<li><a href="#">Doner</a></li>
+<li><a class="last" href="#">View all</a></li>
+</ul>
+</div>
+<div class="item">
+<h2 class="title05"><span>Sport</span></h2>
+<ul>
+<li><a href="#">Football</a></li>
+<li><a href="#">Bikes</a></li>
+<li><a href="#">Golf</a></li>
+<li><a href="#">Tennis</a></li>
+<li><a href="#">Karatedor</a></li>
+<li><a href="#">Yoga</a></li>
+<li><a href="#">Pencatsilat</a></li>
+<li><a href="#">Wushu</a></li>
+<li><a href="#">Runmeters</a></li>
+<li><a href="#">Boxing</a></li>
+<li><a href="#">Bowling</a></li>
+<li><a href="#">Gymnastics</a></li>
+<li><a href="#">Olympics</a></li>
+<li><a class="last" href="#">View all</a></li>
+</ul>
+</div>
+<div class="item">
+<h2 class="title06"><span>jewelry</span></h2>
+<ul>
+<li><a href="#">Australian Opal</a></li>
+<li><a href="#">Ammolite</a></li>
+<li><a href="#">Meteorite Campo Del Cielo</a></li>
+<li><a href="#">Sun Pyrite</a></li>
+<li><a href="#">Faceted Carnelian</a></li>
+<li><a href="#">Round</a></li>
+<li><a class="last" href="#">View all</a></li>
+</ul>
+</div>
+</div>					
+				</div>	
+				
+			</div>
+		</div>
+	</div>
+</div>
+<div class="box-add">
+	<div class="container">
+		<div class="row">
+	        <div class="row">
+				<address class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				&copy; 2015 Magento Demo Store. All Rights Reserved. Designed by <a title="Visit VnThemePro.Com!" href="http://themeforest.net/user/7-Up/portfolio?WT.ac=portfolio_item&WT.z_author=7-Up">7-Up</a>
+				</address>
+				<div class="block-payment col-lg-6 col-md-6 col-sm-6 col-xs-12">
+<ul>
+<li><img src="http://127.0.0.1/mg8/media/wysiwyg/images/p1.png" alt="" /></li>
+<li><img src="http://127.0.0.1/mg8/media/wysiwyg/images/p2.png" alt="" /></li>
+<li><img src="http://127.0.0.1/mg8/media/wysiwyg/images/p3.png" alt="" /></li>
+<li><img src="http://127.0.0.1/mg8/media/wysiwyg/images/p4.png" alt="" /></li>
+<li><img src="http://127.0.0.1/mg8/media/wysiwyg/images/p5.png" alt="" /></li>
+</ul>
+</div>			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($){  
+		$("#gototop").hide();
+		$(function () {
+			var wh = $(window).height();
+			var whtml =  $(document).height();			
+			$(window).scroll(function () {				
+				if ($(this).scrollTop() > whtml/10) {
+					$('#gototop').fadeIn();
+				} else {
+					$('#gototop').fadeOut();
+				}
+			});
+			$('#gototop').click(function () {
+				$('body,html').animate({
+					scrollTop: 0
+				}, 800);
+				return false;
+			});
+		});
+	});
+</script>
+
